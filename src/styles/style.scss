@@ -1,6 +1,7 @@
 $calendarPadd: 10px;
 $calendarGap: 1px;
 $daySize: 100px;
+$borderSize: 1px;
 $startDays: (
   mon: 1,
   tue: 2,
@@ -13,6 +14,10 @@ $startDays: (
 
 .body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .calendar {
@@ -27,6 +32,8 @@ $startDays: (
     height: $daySize;
     width: $daySize;
     background-color: #eee;
+    border: $borderSize solid #000;
+    box-sizing: border-box;
     position: relative;
     display: flex;
     justify-content: center;
@@ -51,7 +58,7 @@ $startDays: (
 
 @each $name, $col in $startDays {
   $offset: $col - 1;
-  .calendar--#{$name} {
+  .calendar--start-day-#{$name} {
     .calendar__day:first-child {
       margin-left: calc(#{$offset} * (#{$daySize} + #{$calendarGap}));
     }
@@ -59,7 +66,7 @@ $startDays: (
 }
 
 @for $days from 28 through 31 {
-  .calendar--#{$days} {
+  .calendar--month-length-#{$days} {
     .calendar__day:nth-child(n + #{$days + 1}) {
       display: none;
     }
